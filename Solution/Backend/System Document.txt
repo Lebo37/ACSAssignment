@@ -13,6 +13,7 @@ With regards to the backend i used MVC to Create my APIs and then used part linq
 The backend system runs on http://localhost:61656
 NB: The connectionString can be found in the web.config and be modified accordingly when testing.
 The database i stored in the App_Data folder of the backend solution.
+Remember to run npm install before running the UI solution for fresh node module packages.
 
 The passwords that i used for login in i had them encrypted so that when storing them they are not plainText.
 

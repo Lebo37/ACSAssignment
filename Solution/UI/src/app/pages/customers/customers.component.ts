@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProxyService } from 'src/app/services/proxy.service';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-customers',
@@ -20,6 +21,7 @@ export class CustomersComponent implements OnInit {
   idNumber: string = '';
   closeResult: string;
 
+  customerForm : FormGroup;
   firstName: string = '';
   lastName: string = '';
   mobileNumber: string = '';
@@ -28,7 +30,25 @@ export class CustomersComponent implements OnInit {
   customerId: number = 0;
 
   constructor(private service: ProxyService,
-    private modalService: NgbModal,) { }
+    private modalService: NgbModal,) {
+      this.customerForm = new FormGroup({
+        idNumber: new FormControl('', Validators.compose([
+          Validators.required
+        ])),
+        firstName: new FormControl('', Validators.compose([
+          Validators.required
+        ])),
+        lastName: new FormControl('', Validators.compose([
+          Validators.required
+        ])),
+        mobileNumber: new FormControl('', Validators.compose([
+          Validators.required
+        ])),
+        emailAddress: new FormControl('', Validators.compose([
+          Validators.required
+        ]))
+      });
+     }
 
   ngOnInit() {
     this.getCustomers();
@@ -48,24 +68,30 @@ export class CustomersComponent implements OnInit {
 
   createCustomer(){
 
-    let cData = {
-      IDNumber: this.idNumber,
-      FirstName: this.firstName,
-      LastName: this.lastName,
-      MobileNumber: this.mobileNumber,
-      EmailAddress: this.emailAddress
+    this.closeAlert();
+
+    if(!this.customerForm.valid){
+      this.hasError = true;
+      this.hasErrorMessage = 'Please provide full customer details, there is some information missing...';
+      return;
     }
 
-    this.hasError = false;
-    this.saveSuccess = false;
-    if (this.idNumber.length > 13) {
+    let cData = {
+      IDNumber: this.customerForm.value.idNumber,
+      FirstName: this.customerForm.value.firstName,
+      LastName: this.customerForm.value.lastName,
+      MobileNumber: this.customerForm.value.mobileNumber,
+      EmailAddress: this.customerForm.value.emailAddress,
+    }
+
+    if (cData.IDNumber.length > 13) {
       this.idNumber = '';
       this.hasError = true;
       this.hasErrorMessage = 'The ID Number entered has more than 13 numbers...';
       return;
     }
     else
-    if (this.idNumber.length < 13) {
+    if (cData.IDNumber.length < 13) {
       this.idNumber = '';
       this.hasError = true;
       this.hasErrorMessage = 'The ID Number entered has less than 13 numbers...';
