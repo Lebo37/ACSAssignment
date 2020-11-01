@@ -1,0 +1,42 @@
+<div style="text-align:center">
+  <h1>
+    Customer Management Portal
+  </h1>
+</div>
+<div class="container padding-top justify-center">
+  <div class="row justify-content-center">
+    <div class="col">
+
+    </div>
+    <div class="col-8">
+
+      <p *ngIf="hasError">
+        <ngb-alert type="danger" (close)="closeAlert()">{{hasErrorMessage}}</ngb-alert>
+      </p>
+      <p *ngIf="saveSuccess">
+        <ngb-alert type="success" (close)="closeAlert()">{{hasSuccessMessage}}</ngb-alert>
+      </p>
+      <div class="form-group">
+        <label for="idInput">ID Number</label>
+        <input type="text" [(ngModel)]="idNumber"  class="form-control" max="13" id="idInput" aria-describedby="idlHelp">
+        <small id="idHelp" class="form-text text-muted">Please supply the 13 digit ID Number...</small>
+      </div>
+      <div class="form-group">
+        <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group" role="group" aria-label="First group">
+            <button class="btn btn-md btn-primary" (click)="getCustomer()">Search</button>
+          </div>
+        </div>
+      </div>
+      <br/>
+  <br/>
+  <div style="text-align:center">
+    <a routerLink="/"><b>Go Back</b></a>
+  </div>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+
+</div>

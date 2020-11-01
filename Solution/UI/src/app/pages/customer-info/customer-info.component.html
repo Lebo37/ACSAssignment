@@ -1,0 +1,92 @@
+<div style="text-align:center">
+  <h1>
+    Customer Details
+  </h1>
+</div>
+<div class="container padding-top justify-center">
+  <div class="row justify-content-center">
+    <div class="col">
+
+    </div>
+    <div class="col-8">
+      <p *ngIf="hasError">
+        <ngb-alert type="danger" (close)="closeAlert()">{{hasErrorMessage}}</ngb-alert>
+      </p>
+      <p *ngIf="saveSuccess">
+        <ngb-alert type="success" (close)="closeAlert()">{{hasSuccessMessage}}</ngb-alert>
+      </p>
+      <div class="form-group">
+        <label for="IDNumberInput">ID Number</label>
+        <input type="text" disabled [(ngModel)]="customerInfo.IDNumber" class="form-control" id="IDNumberInput" aria-describedby="idNoHelp">
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="form-group">
+            <label for="FirstNameInput">FirstName(s)</label>
+            <input type="text" [disabled]="enableEdit" [(ngModel)]="customerInfo.FirstName" class="form-control" id="FirstNameInput" aria-describedby="firstNameHelp">
+          </div>
+
+          <div class="form-group">
+            <label for="MobileNoInput">Mobile No.</label>
+            <input type="tel" [disabled]="enableEdit" [(ngModel)]="customerInfo.MobileNumber" class="form-control" id="MobileNoInput" aria-describedby="mobileHelp">
+          </div>
+        </div>
+        <div class="col-lg-6">
+
+          <div class="form-group">
+            <label for="LastNameInput">Last Name</label>
+            <input type="text" [disabled]="enableEdit" [(ngModel)]="customerInfo.LastName" class="form-control" id="LastNameInput" aria-describedby="lastNameHelp">
+          </div>
+
+          <div class="form-group">
+            <label for="EmailInput">Email Address</label>
+            <input type="text" [disabled]="enableEdit" [(ngModel)]="customerInfo.EmailAddress" class="form-control" id="EmailInput" aria-describedby="emailHelp">
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="enableEdit">
+        <div class="col-lg-6">
+          <button type="button" class="btn btn-warning" (click)="editCustomer()">Edit</button>
+        </div>
+        <div class="col-lg-6">
+          <button type="button" class="btn btn-dark" (click)="open(mydeletemodal)">Delete</button>
+        </div>
+      </div>
+      <div class="row" *ngIf="!enableEdit">
+        <div class="col-lg-6">
+          <button type="button" class="btn btn-warning" (click)="updateCustomer()">Update</button>
+        </div>
+        <div class="col-lg-6">
+          <button type="button" class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div style="text-align:center">
+    <a routerLink="/"><b>Go Back</b></a>
+  </div>
+</div>
+<ng-template #mydeletemodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Warning</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <ngb-alert type="danger">Are you sure you would like to remove your details?</ngb-alert>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click')">Cancel</button>
+    <button type="button" class="btn btn-outline-dark" (click)="deleteCustomer()">Yes</button>
+  </div>
+  </ng-template>

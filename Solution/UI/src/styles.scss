@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  background: linear-gradient(55deg, rgb(255, 255, 255), rgba(17, 51, 124, 0.809)), url('assets/images/Customer_logo.PNG');
+}
+
+.min-100 {
+    min-height: 100%;
+}

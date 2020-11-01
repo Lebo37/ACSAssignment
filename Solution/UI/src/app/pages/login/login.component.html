@@ -1,0 +1,49 @@
+<div style="text-align:center">
+  <h1>
+    Customer Management Portal
+  </h1>
+</div>
+<div class="container padding-top justify-center">
+    <div style="text-align:center">
+      <h3>
+        Login
+      </h3>
+    </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form class="" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div  class="card">
+          <div class="card-body">
+          <div>
+            <p *ngIf="hasError">
+              <ngb-alert type="danger" (close)="closeAlert()">{{hasErrorMessage}}</ngb-alert>
+            </p>
+            <div class="form-group">
+              <label for="usernameInput">Username</label>
+              <input type="text" formControlName="username" class="form-control" id="usernameInput" aria-describedby="usernamelHelp">
+            </div>
+            <div class="form-group">
+              <label for="passwordInput">Password</label>
+              <input type="password" formControlName="password" class="form-control" id="passwordInput" aria-describedby="passwordlHelp">
+            </div>
+            <div class="form-group">
+              <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                  <button class="btn btn-block btn-md btn-dark" [disabled]="!loginForm.valid" type="submit">Login</button>
+                </div>
+                <div class="input-group">
+                  <button class="btn btn-block btn-md btn-dark" routerLink="/register" type="button">Register</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <a routerLink="/"><b>Go Back</b></a>
+      </div>
+    </form>
+    </div>
+  </div>
+
+</div>
